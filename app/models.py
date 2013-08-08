@@ -7,7 +7,7 @@ class User(db.Model):
   username = db.Column(db.String(100), index = True, unique = True)
   name = db.Column(db.String(100))
   password = db.Column(db.String(100))
-  # posts = db.relationship('Post', backref = 'author', lazy = 'dynamic')
+  posts = db.relationship('Post', backref = 'author', lazy = 'dynamic')
 
   def __init__(self, name, username, password):
     self.name = name
@@ -34,9 +34,9 @@ class User(db.Model):
 
 class Post(db.Model):
   id = db.Column(db.Integer, primary_key = True)
-  content = db.Column(db.String(200))
+  content = db.Column(db.String(300))
   timestamp = db.Column(db.DateTime)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
   def __repr__(self):
-      return '<Post %r>' % (self.content)
+    return '<Post %r>' % (self.content)

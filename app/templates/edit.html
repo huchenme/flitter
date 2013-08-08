@@ -1,0 +1,14 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edit Your Profile</h1>
+<hr>
+{% from "macros.html" import render_field %}
+<form method=post action="{{url_for('edit')}}">
+  {{ form.csrf_token }}
+  {{ render_field(form.name) }}
+  {{ render_field(form.username) }}
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}
