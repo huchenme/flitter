@@ -1,16 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Sign In</h1>
+
+{% from "macros.html" import render_field %}
 <form action="" method="post" name="login">
-  {{form.hidden_tag()}}
-  <p>
-    Please enter your OpenID:<br>
-    {{form.openid(size=80)}}<br>
-    {% for error in form.errors.openid %}
-    <span style="color: red;">[{{error}}]</span>
-    {% endfor %}<br>
-  </p>
-  <p><input type="submit" value="Sign In"></p>
+  {{ form.csrf_token }}
+  {{ render_field(form.username) }}
+  {{ render_field(form.password) }}
+  {{ form.submit(class="btn btn-success") }}
 </form>
+
 {% endblock %}

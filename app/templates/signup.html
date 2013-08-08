@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  {% from "macros.html" import render_field %}
+  <form method=post action="{{url_for('signup')}}">
+    {{ form.csrf_token }}
+    {{ render_field(form.name) }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm) }}
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+{% endblock %}
