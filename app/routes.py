@@ -28,8 +28,7 @@ def home():
   if g.user.is_authenticated():
     return redirect(url_for('user', username = g.user.username))
   return render_template("index.html",
-    title = 'Home',
-    posts = posts)
+    title = 'Home')
 
 @app.route('/users')
 def users():
