@@ -49,5 +49,5 @@ class EditForm(Form):
       return True
 
 class PostForm(Form):
-  post = TextAreaField('Say something...', [Required(), Length(min=10, max=200)])
+  post = TextAreaField('Say something...', [Required(), Length(max=200)])
   submit = SubmitField('Post!')

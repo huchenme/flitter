@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<h3 class="title">Write a new post</h3>
+
 {% from "macros.html" import render_field %}
 <form action="{{url_for('new_post')}}" method=post>
   {{ form.csrf_token }}

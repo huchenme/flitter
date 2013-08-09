@@ -11,6 +11,9 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+from momentjs import momentjs
+app.jinja_env.globals['momentjs'] = momentjs
+
 from app import routes, models
 
 if not app.debug and os.environ.get('HEROKU') is None:
