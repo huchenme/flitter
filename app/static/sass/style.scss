@@ -62,3 +62,17 @@ ul.posts {
     margin-top: 5em;
   }
 }
+
+.new-post {
+  h3 {
+    margin-bottom: 1em;
+  }
+  .action {
+    margin-top: 10px;
+  }
+  .char-left {
+    color: #999;
+    @include inline-block;
+    margin-right: 5px;
+  }
+}

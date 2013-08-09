@@ -2,14 +2,24 @@
 
 {% block content %}
 
-<h3 class="title">Write a new post</h3>
+<div class="new-post">
+  <h3 class="title">Write a new post</h3>
 
-{% from "macros.html" import render_field %}
-<form action="{{url_for('new_post')}}" method=post>
-  {{ form.csrf_token }}
-  {{ render_field(form.post, autofocus="autofocus") }}
-  {{ form.submit(class="btn btn-success") }}
-</form>
+  <form action="{{url_for('new_post')}}" method=post>
+    {{ form.csrf_token }}
+    <div class="form-group">
+      {{ form.post(autofocus="autofocus", class="form-control", maxlength=200, id="new_post_field") }}
+    </div>
+    <div class="action">
+      <div class="pull-right">
+        <div class="char-left">
+          <span class="charsRemaining">200</span>
+        </div>
+        {{ form.submit(class="btn btn-success disabled", id="submit") }}
+      </div>
+    </div>
+  </form>
+</div>
 
 {% endblock %}
 
