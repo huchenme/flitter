@@ -4,7 +4,7 @@ from flask import g
 from models import User
 
 class LoginForm(Form):
-  username = TextField('Username', [Required()])
+  user_name = TextField('Username', [Required()])
   password = PasswordField('Password', [Required()])
   submit = SubmitField("Login")
 

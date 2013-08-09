@@ -1,0 +1,27 @@
+@import 'bourbon/bourbon';
+@import 'bootstrap';
+
+@include font-face('altis', '/static/fonts/altis-extrabold-webfont');
+
+.title {
+  font-family: 'altis';
+}
+
+.welcome {
+  text-align: center;
+  padding: 10em 0;
+}
+
+.auth-form {
+  margin-top: 2em;
+  input[type="submit"] {
+    width: 100%;
+  }
+  .title {
+    @extend h4;
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 0;
+  }
+}

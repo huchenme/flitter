@@ -8,7 +8,7 @@
     {% endif %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   </head>
@@ -23,12 +23,9 @@
         </button>
 
         <!-- Be sure to leave the brand out there if you want it shown -->
-        <a class="navbar-brand" href="{{url_for('home')}}">Flitter</a>
+        <a class="navbar-brand title" href="{{url_for('home')}}">Flitter</a>
         <!-- Place everything within .nav-collapse to hide it until above 768px -->
         <div class="nav-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="{{url_for('users')}}">Users</a></li>
-          </ul>
           <ul class="nav navbar-nav pull-right">
             {% if current_user.is_authenticated() %}
             <li class="dropdown">
@@ -41,9 +38,6 @@
                 <li><a href="{{url_for('logout')}}">Logout</a></li>
               </ul>
             </li>
-            {% else %}
-            <li><a href="{{url_for('signup')}}">Sign up</a></li>
-            <li><a href="{{url_for('login')}}">Login</a></li>
             {% endif %}
           </ul>
         </div><!-- /.nav-collapse -->

@@ -1,3 +1,5 @@
 *.pyc
 .DS_Store
 *.log
+app.db
+app/static/.sass-cache/

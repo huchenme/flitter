@@ -1,6 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome to Flitter!</h1>
+<div class="row">
+  <div class="col-12 col-sm-6 col-lg-8">
+    <div class="welcome">
+      <h1 class="title">“Welcome to Flitter”</h1>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-lg-4 auth-form">
+    {% from "macros.html" import render_field %}
+    <div class="well">
+      <form action="{{url_for('login')}}" method=post>
+        {{ login_form.csrf_token }}
+        {{ render_field(login_form.user_name) }}
+        {{ render_field(login_form.password) }}
+        {{ login_form.submit(class="btn btn-success") }}
+      </form>
+    </div>
 
+    <div class="well">
+      <div class="title">Sign up</div>
+      <form action="{{url_for('signup')}}" method=post>
+        {{ signup_form.csrf_token }}
+        {{ render_field(signup_form.name) }}
+        {{ render_field(signup_form.username) }}
+        {{ render_field(signup_form.password) }}
+        {{ render_field(signup_form.confirm) }}
+        {{ signup_form.submit(class="btn btn-primary") }}
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}

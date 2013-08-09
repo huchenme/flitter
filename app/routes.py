@@ -23,39 +23,45 @@ def internal_error(error):
   db.session.rollback()
   return render_template('500.html'), 500
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/')
 def home():
   if g.user.is_authenticated():
-    return redirect(url_for('user', username = g.user.username))
-  return render_template("index.html",
-    title = 'Home')
+    posts = Post.query.order_by("timestamp desc").all()
+    return render_template("posts.html",
+      posts = posts)
+  else:
+    login_form = LoginForm()
+    signup_form = SignupForm()
+    return render_template("index.html",
+      login_form = login_form,
+      signup_form = signup_form)
 
-@app.route('/users')
-def users():
-  users = User.query.all()
-  posts = Post.query.all()
-  return render_template("users.html",
-    title = 'Users',
-    posts = posts,
-    users = users)
+# Debugging purpose
+# @app.route('/users')
+# def users():
+#   users = User.query.all()
+#   posts = Post.query.all()
+#   return render_template("users.html",
+#     title = 'Users',
+#     posts = posts,
+#     users = users)
 
-@app.route('/login')
+@app.route('/login', methods = ['POST'])
 def login():
-  form = LoginForm(request.form)
+  form = LoginForm()
   if form.validate_on_submit():
-    user = User.query.filter_by(username=form.username.data.lower()).first()
+    user = User.query.filter_by(username=form.user_name.data.lower()).first()
     if user and check_password_hash(user.password, form.password.data):
       login_user(user, remember = True)
       flash('Welcome %s!' % user.name, 'success')
       return redirect(request.args.get('next') or url_for('home'))
-    flash('Wrong username or password', 'danger')
-  return render_template('login.html',
-    title = 'Sign In',
-    form = form)
+    flash('Wrong Username or password', 'danger')
+  return render_template('index.html',
+    login_form = form, signup_form = SignupForm())
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods = ['POST'])
 def signup():
-  form = SignupForm(request.form)
+  form = SignupForm()
   if form.validate_on_submit():
     # create an user instance not yet stored in the database
     user = User(name=form.name.data, username=form.username.data, \
@@ -64,12 +70,12 @@ def signup():
     db.session.add(user)
     db.session.commit()
     login_user(user, remember = True)
-
     # flash will display a message to the user
     flash('Thanks for signing up', 'success')
     # redirect user to the 'home' method of the user module.
     return redirect(url_for('home'))
-  return render_template("signup.html", form=form)
+  return render_template("index.html",
+    signup_form=form, login_form = LoginForm())
 
 @app.route('/logout')
 def logout():
